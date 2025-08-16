@@ -24,8 +24,23 @@ answer = '''
 SELECT * FROM beverages
 CROSS JOIN food_items
 '''
-
 solution = duckdb.sql(answer).df()
+
+
+st.write("""
+# SQL SRS
+Spaced Repetition System SQL practice
+""")
+
+
+with st.sidebar:
+    option = st.selectbox(
+        "What would you like to review ?",
+        ("Joins", "GroupBy", "Window functions"),
+        index = None,
+        placeholder="Select a theme..."
+    )
+    st.write(f"You have selected {option}")
 
 
 st.header("Enter your code :")
