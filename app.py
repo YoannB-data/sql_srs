@@ -39,7 +39,8 @@ Spaced Repetition System SQL practice
 
 with st.sidebar:
     option = st.selectbox(
-        "What would you like to review ?", ("Joins", "GroupBy", "Window functions"),
+        "What would you like to review ?",
+        ("Joins", "GroupBy", "Window functions"),
         index=None,
         placeholder="Select a theme...",
     )
