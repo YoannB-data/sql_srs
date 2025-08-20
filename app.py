@@ -41,8 +41,8 @@ if query:
 tab2, tab3 = st.tabs(["Tables", "Solution"])
 
 with tab2:
-     exercise_tables = exercise.loc[0, "tables"]
-     for table in exercise_tables:
+    exercise_tables = exercise.loc[0, "tables"]
+    for table in exercise_tables:
         st.write(f"table: {table}")
         df_table = con.execute(f"SELECT * FROM {table}").df()
         st.dataframe(df_table)
