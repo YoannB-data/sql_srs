@@ -8,17 +8,21 @@ con = duckdb.connect(database="data/exercises_sql_tables.duckdb", read_only=Fals
 # EXERCISES LIST
 # ------------------------------------------------------------
 data = {
-    "theme": ["cross_joins", "cross_joins", "window functions"],
-    "exercise_name": ["beverages_and_food", "sizes_and_trademarks", "window functions"],
-    "tables": [["beverages", "food_items"], ["sizes", "trademarks"], []],
-    "last_reviewed": ["1980-01-01", "1970-01-01", ""],
+    "theme": ["cross_joins", "cross_joins", "group by"],
+    "exercise_name": ["beverages_and_food", "sizes_and_trademarks", "group_by_ventes"],
+    "tables": [
+        ["beverages", "food_items"],
+        ["sizes", "trademarks"],
+        ["clients", "ventes"],
+    ],
+    "last_reviewed": ["1980-01-01", "1970-01-01", "1970-01-01"],
 }
 memory_state_df = pd.DataFrame(data)
 con.execute("CREATE TABLE IF NOT EXISTS memory_state AS SELECT * FROM memory_state_df")
 
 
 # -----------------------------------------
-# CROSS JOIN EXERCICE
+# CROSS JOIN EXERCISE
 # -----------------------------------------
 csv = """
 beverage, price
@@ -40,7 +44,7 @@ con.execute("CREATE TABLE IF NOT EXISTS food_items AS SELECT * FROM food_items")
 
 
 # -----------------------------------------
-# CROSS JOIN EXERCICE 2
+# CROSS JOIN EXERCISE 2
 # -----------------------------------------
 csv3 = """
 size
@@ -61,5 +65,45 @@ Lewis
 """
 trademarks = pd.read_csv(io.StringIO(csv4))
 con.execute("CREATE TABLE IF NOT EXISTS trademarks AS SELECT * FROM trademarks")
+
+
+# -----------------------------------------
+# GROUP BY EXERCISE
+# -----------------------------------------
+csv5 = """
+client
+Oussama
+Julie
+Chris
+Tom
+Oussama
+Julie
+Chris
+Tom
+Oussama
+Julie
+Chris
+Tom
+"""
+clients = pd.read_csv(io.StringIO(csv5))
+con.execute("CREATE TABLE IF NOT EXISTS clients AS SELECT * FROM clients")
+
+csv6 = """
+vente
+120
+49
+35
+23
+19
+5.99
+20
+18.77
+39
+10
+17
+12
+"""
+ventes = pd.read_csv(io.StringIO(csv6))
+con.execute("CREATE TABLE IF NOT EXISTS ventes AS SELECT * FROM ventes")
 
 con.close()

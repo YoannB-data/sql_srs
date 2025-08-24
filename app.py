@@ -58,6 +58,7 @@ with st.sidebar:
         select_exercise_query = f"SELECT * FROM memory_state WHERE theme = '{theme}'"
     else:
         select_exercise_query = f"SELECT * FROM memory_state"
+
     exercise = (
         con.execute(select_exercise_query)
         .df()
